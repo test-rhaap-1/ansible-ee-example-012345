@@ -10,6 +10,7 @@ dependencies:
     collections:
       - name: ansible.windows
       - name: community.kubernetes
+      - name: community.docker
       - name: ansible.mcp_builder
       - name: ansible.mcp
 
@@ -24,5 +25,5 @@ additional_build_steps:
     - COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg
     - COPY _build/configs/mcp-vars.yaml /tmp/mcp-vars.yaml
   append_final:
-    - RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=azure_mcp,github_mcp -e @/tmp/mcp-vars.yaml
+    - RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=aws_core_mcp -e @/tmp/mcp-vars.yaml
     - RUN rm -f /etc/ansible/ansible.cfg /tmp/mcp-vars.yaml

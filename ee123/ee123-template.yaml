@@ -82,7 +82,7 @@ spec:
         collections:
           title: Ansible Collections
           type: array
-          default: [{"name":"ansible.windows"},{"name":"community.kubernetes"},{"name":"ansible.mcp_builder"},{"name":"ansible.mcp"}]
+          default: [{"name":"ansible.windows"},{"name":"community.kubernetes"},{"name":"community.docker"},{"name":"ansible.mcp_builder"},{"name":"ansible.mcp"}]
           description: Add collections manually
           items:
             type: object
@@ -195,7 +195,7 @@ spec:
         mcpServers:
           title: MCP Servers
           type: array
-          default: ["azure_mcp","github_mcp"]
+          default: ["aws_core_mcp"]
           items:
             type: string
             title: MCP Server
@@ -222,7 +222,7 @@ spec:
         additionalBuildSteps:
           title: Additional Build Steps
           type: array
-          default: [{"stepType":"prepend_base","commands":["COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg","COPY _build/configs/mcp-vars.yaml /tmp/mcp-vars.yaml"]},{"stepType":"append_final","commands":["RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=azure_mcp,github_mcp -e @/tmp/mcp-vars.yaml","RUN rm -f /etc/ansible/ansible.cfg /tmp/mcp-vars.yaml"]}]
+          default: [{"stepType":"prepend_base","commands":["COPY _build/configs/ansible.cfg /etc/ansible/ansible.cfg","COPY _build/configs/mcp-vars.yaml /tmp/mcp-vars.yaml"]},{"stepType":"append_final","commands":["RUN ansible-playbook ansible.mcp_builder.install_mcp -e mcp_servers=aws_core_mcp -e @/tmp/mcp-vars.yaml","RUN rm -f /etc/ansible/ansible.cfg /tmp/mcp-vars.yaml"]}]
           items:
             type: object
             properties:
